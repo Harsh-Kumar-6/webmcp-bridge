@@ -1,0 +1,8 @@
+.env*
+.webmcp-data
+.next
+.next-test
+.*
+node_modules
+scripts
+AGENTS.md

@@ -1,0 +1,259 @@
+{
+ "schemaVersion": 2,
+ "siteId": "hn-algolia-com",
+ "url": "https://hn.algolia.com/",
+ "goal": "search stories by keyword",
+ "createdAt": "2026-11-04T18:57:37.649Z",
+ "logs": [
+  "Opening the site in a real browser",
+  "Spark is exploring the site toward your goal",
+  "  step 1: type_text input \"Search stories by title, url or author\" \u2190 \"quantum computing\" (ok)",
+  "  step 2: type_text input \"Search stories by title, url or author\" \u2190 \"quantum computing\" (ok)",
+  "  step 3: type_text input \"Search stories by title, url or author\" \u2190 \"artificial intelligence\" (ok)",
+  "  step 4: type_text input \"Search stories by title, url or author\" \u2190 \"artificial intelligence\" (ok)",
+  "Exploration reached the goal: The action ran with two different inputs.",
+  "Captured 13 request(s), 1 possible tool endpoint(s)",
+  "Spark is writing tools and tests. Plain code decides which ones ship",
+  "  shipped search_stories: 2/2 tests passed",
+  "Done: 1 verified tool(s), $0.0267 in Meta API usage"
+ ],
+ "steps": [
+  {
+   "step": 1,
+   "action": "type_text",
+   "detail": "input \"Search stories by title, url or author\" \u2190 \"quantum computing\"",
+   "outcome": "ok"
+  },
+  {
+   "step": 2,
+   "action": "type_text",
+   "detail": "input \"Search stories by title, url or author\" \u2190 \"quantum computing\"",
+   "outcome": "ok"
+  },
+  {
+   "step": 3,
+   "action": "type_text",
+   "detail": "input \"Search stories by title, url or author\" \u2190 \"artificial intelligence\"",
+   "outcome": "ok"
+  },
+  {
+   "step": 4,
+   "action": "type_text",
+   "detail": "input \"Search stories by title, url or author\" \u2190 \"artificial intelligence\"",
+   "outcome": "ok"
+  }
+ ],
+ "costUsd": 0.026666050000000004,
+ "tools": [
+  {
+   "kind": "network",
+   "name": "search_stories",
+   "description": "Search Hacker News stories by keyword. Returns matching stories with title, URL, author, points, and comment counts.",
+   "method": "POST",
+   "urlTemplate": "https://uj5wyc0l7x-dsn.algolia.net/1/indexes/Item_dev/query",
+   "bodyFormat": "json",
+   "headers": {
+    "content-type": "application/x-www-form-urlencoded"
+   },
+   "params": [
+    {
+     "name": "x-algolia-agent",
+     "type": "string",
+     "in": "query",
+     "exposed": false,
+     "required": false,
+     "value": "Algolia for JavaScript (4.13.1); Browser (lite)"
+    },
+    {
+     "name": "x-algolia-api-key",
+     "type": "string",
+     "in": "query",
+     "exposed": false,
+     "required": false,
+     "value": "28f0e1ec37a5e792e6845e67da5f20dd"
+    },
+    {
+     "name": "x-algolia-application-id",
+     "type": "string",
+     "in": "query",
+     "exposed": false,
+     "required": false,
+     "value": "UJ5WYC0L7X"
+    },
+    {
+     "name": "query",
+     "type": "string",
+     "in": "body",
+     "exposed": true,
+     "required": true,
+     "description": "Keyword or phrase to search for in story titles, text, URL, and author.",
+     "value": "artificial intelligence"
+    },
+    {
+     "name": "analyticsTags",
+     "type": "json",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": [
+      "web"
+     ]
+    },
+    {
+     "name": "page",
+     "type": "number",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": 0
+    },
+    {
+     "name": "hitsPerPage",
+     "type": "number",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": 30
+    },
+    {
+     "name": "minWordSizefor1Typo",
+     "type": "number",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": 4
+    },
+    {
+     "name": "minWordSizefor2Typos",
+     "type": "number",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": 8
+    },
+    {
+     "name": "advancedSyntax",
+     "type": "boolean",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": true
+    },
+    {
+     "name": "ignorePlurals",
+     "type": "boolean",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": false
+    },
+    {
+     "name": "clickAnalytics",
+     "type": "boolean",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": true
+    },
+    {
+     "name": "minProximity",
+     "type": "number",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": 7
+    },
+    {
+     "name": "numericFilters",
+     "type": "json",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": []
+    },
+    {
+     "name": "tagFilters",
+     "type": "json",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": [
+      [
+       "story"
+      ],
+      []
+     ]
+    },
+    {
+     "name": "typoTolerance",
+     "type": "boolean",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": true
+    },
+    {
+     "name": "queryType",
+     "type": "string",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": "prefixNone"
+    },
+    {
+     "name": "restrictSearchableAttributes",
+     "type": "json",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": [
+      "title",
+      "comment_text",
+      "url",
+      "story_text",
+      "author"
+     ]
+    },
+    {
+     "name": "getRankingInfo",
+     "type": "boolean",
+     "in": "body",
+     "exposed": false,
+     "required": false,
+     "value": true
+    }
+   ],
+   "resultPath": "hits",
+   "resultFields": [
+    "title",
+    "url",
+    "author",
+    "points",
+    "num_comments",
+    "story_id",
+    "created_at"
+   ],
+   "tests": [
+    {
+     "label": "search artificial intelligence",
+     "input": {
+      "query": "artificial intelligence"
+     },
+     "ok": true,
+     "note": "20 result(s)",
+     "durationMs": 311
+    },
+    {
+     "label": "search startup",
+     "input": {
+      "query": "startup"
+     },
+     "ok": true,
+     "note": "20 result(s)",
+     "durationMs": 100
+    }
+   ],
+   "lastVerified": "2026-11-04T18:57:37.165Z"
+  }
+ ]
+}

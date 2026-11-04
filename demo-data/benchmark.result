@@ -1,0 +1,75 @@
+{
+ "runAt": "2026-11-04T19:06:08.073Z",
+ "rows": [
+  {
+   "task": "Top Hacker News story for \"rust\"",
+   "compiled": {
+    "ok": true,
+    "seconds": 0.375,
+    "usd": 0
+   },
+   "baseline": {
+    "ok": true,
+    "seconds": 14.233,
+    "usd": 0.0060512,
+    "steps": 3
+   }
+  },
+  {
+   "task": "Top Hacker News story for \"postgres\"",
+   "compiled": {
+    "ok": true,
+    "seconds": 0.365,
+    "usd": 0
+   },
+   "baseline": {
+    "ok": true,
+    "seconds": 14.55,
+    "usd": 0.0073912000000000005,
+    "steps": 3
+   }
+  },
+  {
+   "task": "Top Hacker News story for \"webassembly\"",
+   "compiled": {
+    "ok": true,
+    "seconds": 0.364,
+    "usd": 0
+   },
+   "baseline": {
+    "ok": true,
+    "seconds": 16.491,
+    "usd": 0.00907875,
+    "steps": 3
+   }
+  },
+  {
+   "task": "List every free seat on a canvas map",
+   "compiled": {
+    "ok": true,
+    "seconds": 0.769,
+    "usd": 0
+   },
+   "baseline": {
+    "ok": true,
+    "seconds": 6.426,
+    "usd": 0.00381225,
+    "steps": 1
+   }
+  },
+  {
+   "task": "Select seat C9 on a canvas map",
+   "compiled": {
+    "ok": true,
+    "seconds": 0.991,
+    "usd": 0
+   },
+   "baseline": {
+    "ok": true,
+    "seconds": 49.573,
+    "usd": 0.0237522,
+    "steps": 5
+   }
+  }
+ ]
+}

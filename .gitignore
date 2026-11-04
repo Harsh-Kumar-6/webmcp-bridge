@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# compiled sites and usage ledger (may hold site keys)
+.webmcp-data/
+.next-test/

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lakeside Theatre: choose a seat</title>
+<style>
+  body { margin: 0; background: #f4f1ea; font-family: Georgia, serif; color: #2b2b2b; }
+  canvas { display: block; margin: 0 auto; }
+</style>
+</head>
+<body>
+<canvas id="map" width="1100" height="720"></canvas>
+<script>
+  // Everything is drawn as pixels on purpose: there are no seat elements and no seat API.
+  const ROWS = 6, COLS = 10, SIZE = 58, GAP = 26, LEFT = 150, TOP = 170;
+  const COLORS = { free: '#2e9e5b', taken: '#c9c4b8', selected: '#e0872b' };
+  const TAKEN = new Set(['0-2','0-3','1-5','1-6','1-7','2-0','2-9','3-3','3-4','4-1','4-6','4-7','5-2','5-5','5-8']);
+  const selected = new Set();
+  const canvas = document.getElementById('map');
+  const ctx = canvas.getContext('2d');
+  const seatAt = (r, c) => ({ x: LEFT + c * (SIZE + GAP), y: TOP + r * (SIZE + GAP) });
+  const stateOf = (r, c) => selected.has(r + '-' + c) ? 'selected' : TAKEN.has(r + '-' + c) ? 'taken' : 'free';
+
+  const CHAIRS = new URLSearchParams(location.search).get('style') !== 'squares';
+
+  function drawSeat(x, y, fill) {
+    ctx.strokeStyle = 'rgba(0,0,0,0.45)';
+    ctx.lineWidth = 2;
+    const part = (px, py, w, h, r, color) => {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.roundRect(px, py, w, h, r);
+      ctx.fill();
+      ctx.stroke();
+    };
+    if (!CHAIRS) return part(x, y, SIZE, SIZE, 12, fill);
+    part(x + 8, y, SIZE - 16, 26, 8, fill);       // backrest
+    part(x, y + 16, 9, 38, 4, '#6b6459');         // left arm
+    part(x + SIZE - 9, y + 16, 9, 38, 4, '#6b6459'); // right arm
+    part(x + 7, y + 24, SIZE - 14, 30, 8, fill);  // cushion
+    part(x + 14, y + 53, 6, 5, 1, '#6b6459');     // legs
+    part(x + SIZE - 20, y + 53, 6, 5, 1, '#6b6459');
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#2b2b2b';
+    ctx.font = '26px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText('Lakeside Theatre', canvas.width / 2, 40);
+    ctx.fillStyle = '#3a3a44';
+    ctx.fillRect(250, 70, 600, 44);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '18px Georgia';
+    ctx.fillText('STAGE', 550, 98);
+    for (let r = 0; r < ROWS; r++) {
+      ctx.fillStyle = '#2b2b2b';
+      ctx.font = '20px Georgia';
+      ctx.fillText(String.fromCharCode(65 + r), LEFT - 36, seatAt(r, 0).y + 36);
+      for (let c = 0; c < COLS; c++) {
+        const { x, y } = seatAt(r, c);
+        drawSeat(x, y, COLORS[stateOf(r, c)]);
+      }
+    }
+    ctx.textAlign = 'left';
+    ctx.font = '17px Georgia';
+    [['Free', COLORS.free], ['Taken', COLORS.taken], ['Selected', COLORS.selected]].forEach(([name, fill], i) => {
+      const x = 330 + i * 160;
+      ctx.fillStyle = fill;
+      ctx.fillRect(x, 682, 20, 20);
+      ctx.fillStyle = '#2b2b2b';
+      ctx.fillText(name, x + 28, 698);
+    });
+    ctx.textAlign = 'center';
+  }
+
+  canvas.addEventListener('click', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    const px = event.clientX - rect.left, py = event.clientY - rect.top;
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+      const { x, y } = seatAt(r, c);
+      if (px >= x && px <= x + SIZE && py >= y && py <= y + SIZE && stateOf(r, c) !== 'taken') {
+        const key = r + '-' + c;
+        selected.has(key) ? selected.delete(key) : selected.add(key);
+        draw();
+      }
+    }
+  });
+  draw();
+
+  // Answer key for automated checks only. The compiler does not read it.
+  window.__seatTruth = () => {
+    const rect = canvas.getBoundingClientRect();
+    const seats = [];
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+      const { x, y } = seatAt(r, c);
+      seats.push({ label: String.fromCharCode(65 + r) + (c + 1), state: stateOf(r, c),
+        x1: rect.left + x, y1: rect.top + y, x2: rect.left + x + SIZE, y2: rect.top + y + SIZE });
+    }
+    return seats;
+  };
+</script>
+</body>
+</html>
